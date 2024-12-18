@@ -11,6 +11,11 @@ body {
    
 } 
 
+aside, main, footer {
+    position: relative;
+    z-index: 1;
+}
+
 aside {
     
     width: 180px;
@@ -188,7 +193,9 @@ footer .introduce a{
     width: 340px;
     height: 500px;
     border-radius: 10px;
+    background-color: white;
     z-index: 1000;
+    /* opacity: 20%; */
 }
 
 .modal .modal-header {
@@ -226,6 +233,5 @@ footer .introduce a{
 }
 .visible {
     display: flex;
-    position: relative;
-    z-index: 10;
+    
 }
