@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello.World</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <div class="profileimage">
+            <img src="assets/icons/default_profile.svg">
+        </div>
+        <div class="profile-right">
+            <div class="profileset">
+                <span id="nickname"></span>
+                <button id="modal-setting">프로필 편집</button>
+                <dialog class="modal" id="modal">
+                    <form method="dialog">
+                    <div class="modal-header">
+                        <span>프로필 편집</span>
+                        <input type="submit" value="저장">
+                    </div>
+                    <div class="modal-content">
+                        <div>
+                            <label for="instaid">인스타 아이디</label><br>
+                            <input type="text" id="instaid" value="instaid">
+                        </div>
+                        <div>
+                            <label for="name">이름</label><br>
+                            <input type="text" id="name" value="name">
+                        </div>
+                        <div>
+                            <label for="website">웹사이트</label><br>
+                            <input type="url" id="website" value="website">
+                        </div>
+                            <label for="textprofile">프로필 설명</label><br>
+                            <textarea id="textprofile" value="textprofile">
+                        </div>
+                    </div>
+                    <div class="close">
+                        <img src="assets/icons/close_icon.svg" id="close">
+                    </div>
+                    </form>
+                </dialog>
+
+                <button>보관된 스토리 보기</button>
+                <img src="assets/icons/setting_icon.svg">
+            </div>
+            <div class="number-area">
+                <span>게시물<span class="number" id="postcount"></span></span>
+                <span>팔로워<span class="number">103</span></span>
+                <span>팔로우<span class="number">96</span></span>
+            </div>
+            <div class="text-area">
+                <p id="name"></p>
+                <p id="text"></p>
+                <a href="" id="site"></a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="sortline">
+            <span id="posts"><img src="assets/icons/grid_icon.svg">게시물</span>
+            <span id="saved"><img src="assets/icons/bookmark_icon.svg">저장됨</span>
+            <span id="taged"><img src="assets/icons/contact_icon.svg">태그됨</span>
+        </div>
+        <div class="threeposts">
+            <div id="firstpost"></div>
+            <div id="secondpost"></div>
+            <div id="thirdpost"></div>
+        </div>
+    </main>
+    <aside>
+        <div class="logo">
+            
+            <a href="https://www.instagram.com">
+                <img src="assets/icons/instagram_logo.svg">
+            </a>
+        </div>
+        <nav class="sidebar">
+            <ul>
+                <li class="menu-item">
+                    <img src="assets/icons/home_icon.svg">
+                    <a href="">홈</a>
+                </li>
+                <li class="menu-item">
+                    <img src="assets/icons/search_icon.svg">
+                    <a href="">검색</a>
+                </li>
+                <li class="menu-item">
+                    <img src="assets/icons/explore_icon.svg">
+                    <a href="">탐색</a>
+                </li>
+                <li class="menu-item">
+                    <img src="assets/icons/media_icon.svg">
+                    <a href="">릴스</a>
+                </li>
+                <li class="menu-item">
+                    <img src="assets/icons/send_icon.svg">
+                    <a href="">메시지</a>
+                </li>
+                <li class="menu-item">
+                    <img src="assets/icons/favorite_icon.svg">
+                    <a href="">알림</a>
+                </li>
+                <li class="menu-item">
+                    <img src="assets/icons/add_icon.svg">
+                    <a href="">만들기</a>
+                </li>
+                <li class="menu-item">
+                    <img src="assets/icons/contact_icon.svg">
+                    <a href="">프로필</a>
+                </li>
+            </ul>            
+        </nav>
+    </aside>
+    <footer>
+        <div class="introduce">
+            <a href="">Meta</a>
+            <a href="">소개</a>
+            <a href="">블로그</a>
+            <a href="">채용정보</a>
+            <a href="">도움말</a>
+            <a href="">API</a>
+            <a href="">개인정보처리방침</a>
+            <a href="">약관</a>
+            <a href="">위치</a>
+            <a href="">Instagram Lite</a>
+            <a href="">Threads</a>
+            <a href="">연락처 업로드&비사용자</a>
+            <a href="">Meta Verified</a> 
+        </div>
+        <div class="language">
+            <span>한국어</span>
+            <span>2024 Instagram from Meta</span>
+        </div>
+
+    </footer>
+    
+
+    <script src="index.js"></script>
+</body>
+</html>
