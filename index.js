@@ -114,6 +114,8 @@ window.addEventListener('DOMContentLoaded', ()=>{
         uploadpost.classList.add("visible");
         body.classList.add("darkback");
         });
+
+    
     
     
 });
