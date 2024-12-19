@@ -29,6 +29,8 @@ aside {
     justify-content: flex-start;
     margin: 10px; */
     padding: 20px 10px;
+    background: radial-gradient(white 10%, rgba(238, 172, 194, 0.486) 75%, rgba(6, 227, 243, 0.418));
+
     
 }
 
@@ -48,7 +50,7 @@ aside .logo img{
 .sidebar a {
     text-decoration: none;
     font-size: 14px;
-    color : black
+    color : #000000
     
 }
 
@@ -59,11 +61,14 @@ aside .logo img{
     cursor: pointer;
     padding: 8px;
     border-radius: 8px;
-    transition: background-color 0.5s;
+    transition: background-color 0.3s;
 }
 .menu-item:hover {
-    background-color: rgb(250, 238, 238);
+    background-color: rgba(238, 172, 194, 0.979);
     font-weight: bold;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+
+    
 }
 
 .menu-item img{
@@ -71,7 +76,9 @@ aside .logo img{
     margin-right: 5px;
 }
 header, main, footer {
-    margin-left: 240px !important;
+    margin-left: 260px !important;
+    margin-right: 180px;
+
     padding: 15px
 }
 
@@ -91,6 +98,9 @@ header .profileimage img{
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
+    margin-left: 320px ;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
 }
 header .profile-right {
     display: flex;
@@ -215,8 +225,8 @@ footer .introduce a{
     align-items: center; 
     justify-content: center;
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 40%;
+    left: 35%;
     transform: translate(-50%, -50%);
     border: 1px solid #ccc;
     border-radius: 7px;
@@ -257,7 +267,8 @@ footer .introduce a{
     display: flex;
     flex-direction: column;
     
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: bold;
     gap: 15px;
     padding: 10px;
 }
@@ -273,12 +284,22 @@ footer .introduce a{
     width: 80px;
     margin-left: 40px;
 }
+.modal-content #inputimg:hover{
+    cursor: pointer;
+    background-color: rgb(238, 172, 194);
+    box-shadow: 0 2px 10px rgba(212, 20, 155, 0.4);
+    
+}
+
+.modal-content #fileinput{
+    display: none;
+}
 
 .close {
     display: none;
     position: fixed;
     top: 10px;
-    right: 10px;
+    right: 20px;
     cursor: pointer;
 }
 .close img{
