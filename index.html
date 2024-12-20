@@ -80,9 +80,7 @@
         </div>
         <div class="threeposts">
             <img src="assets/icons/nopost.png" id="nopost">
-            <div id="firstpost"></div>
-            <div id="secondpost"></div>
-            <div id="thirdpost"></div>
+            
         </div>
     </main>
     <aside>
@@ -123,17 +121,32 @@
                     <a href="" id="upload">만들기</a>
                 </li>               
                 <dialog class="uploadpost" id="uploadpost">
-                  
                     <div class="newpost-header">
                         <span>새 게시물 만들기</span>
                     </div>
                     <div class="newpost-content">
-                        <div>
-                            <label for="newpost">
-                                <img src="assets/icons/media_icon (1).svg" id="inputimg">
-                                <span>사진을 선택하세요.</span>
-                                <input type="file" accept="image/*" id="newpost"  >
-                            </label>
+                        
+                        
+                        <img src="assets/icons/media_icon (1).svg" id="inputimg">
+                        
+                        <span>사진을 선택하세요.</span>
+                        <label for="newpost">컴퓨터에서 선택
+                        <input type="file" accept="image/*" id="newpost"  >
+                        </label>
+                    </div>
+                </dialog>
+
+                <dialog class="uploadpost1" id="uploadpost1">
+                    <div class="newpost-header1">
+                        <span>새 게시물 만들기</span>
+                        <input type="submit" value="공유하기" id="sharepost">
+                    </div>
+                    <div class="newpost-content1">
+                        <div class="content1-left">
+                        <img src="" id="newpostimg">
+                        </div>
+                        <div class="content1-right">
+                            <textarea placeholder="여기에 내용을 입력하세요."></textarea>
                         </div>
                     </div>
                 </dialog>

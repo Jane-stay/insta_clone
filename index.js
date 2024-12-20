@@ -22,12 +22,21 @@ window.addEventListener('DOMContentLoaded', ()=>{
     const modalProfile = document.querySelector('.modal-content #textprofile');
 
     const upload = document.querySelector('.sidebar #upload');
-    let uploadpost = document.getElementById("uploadpost");
-    
 
+    const uploadpost = document.getElementById("uploadpost");
+    const newpost = document.getElementById("newpost");
+    const uploadpost1 = document.getElementById("uploadpost1");
+    const newpostimg = document.getElementById("newpostimg");
+    const sharePost = document.getElementById("sharepost");
+    const postText = document.querySelector('.content1-right textarea');
+
+    const threeposts = document.getElementsByClassName("threeposts");
+    
+    const nopost = document.getElementById("nopost");
 
 
     let imageData = "";
+    let imageData1 = "";
 
     save.addEventListener('click', ()=>{
        
@@ -49,6 +58,12 @@ window.addEventListener('DOMContentLoaded', ()=>{
     modal.classList.add("visible");
     body.classList.add("darkback");
     close.classList.add("visible");
+    
+    inputimg.src=profileimage.src;
+    modalId.value = nickname.textContent;
+    modalName.value = name.textContent;
+    modalSite.value = site.href;
+    modalProfile.value = text.textContent;
     });
 
     closeButton.addEventListener("click", ()=>{
@@ -99,14 +114,23 @@ window.addEventListener('DOMContentLoaded', ()=>{
         if(file) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                imageData = e.target.result;
-                inputimg.src = imageData;
+                const imageData = e.target.result;
+                inputimg.src = imageData; 
+                profileimage.src = imageData; 
+                saveToLocal()
             };
             reader.readAsDataURL(file);
         }
     })
     loadImage();
     loadFromLocal();
+
+    function closeSecondModal() {
+        // uploadpost.classList.add("invisible");
+        uploadpost.classList.remove("visible");
+        // body.classList.remove("darkback");
+        // close.classList.remove("visible")
+    };
 
 
     upload.addEventListener("click", (e)=>{
@@ -115,9 +139,57 @@ window.addEventListener('DOMContentLoaded', ()=>{
         body.classList.add("darkback");
         });
 
+    newpost.addEventListener('change', (e)=>{
+        const file = e.target.files[0];
+        if(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                
+                closeSecondModal();
+                newpostimg.src = e.target.result;
+                uploadpost1.showModal();
+                close.classList.add("visible");
+            };
+            reader.readAsDataURL(file);
+        }
+    });
     
-    
-    
+
+
+    //공유하기 이후 단계
+    sharePost.addEventListener('click', ()=>{
+        if(newpostimg.src) {
+            firstpost.innerHTML = `<img src= ${newpostimg.src}>`
+
+
+            saveToLocal1();
+            uploadpost1.close();
+            body.classList.remove("darkback");
+            close.classList.add("invisible");
+            nopost.classList.add("invisible");
+            
+        }
+    });
+
+    function saveToLocal1 () {
+        let dataAll1 = {
+            postimage : newpostimg.src,
+            postText: postText.value,
+        };
+        localStorage.setItem("dataAll1", JSON.stringify(dataAll1));
+    }
+
+    function loadFromLocal1() {
+        const data = JSON.parse(localStorage.getItem('dataAll1'));
+        if (data) {
+            firstpost.innerHTML =  `<img src= ${data.postimage}>`
+            text.textContent = data.postText;
+            
+        }
+    }
+    loadFromLocal1();
+
+
 });
 
 
