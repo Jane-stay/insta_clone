@@ -1,4 +1,3 @@
-
 window.addEventListener('DOMContentLoaded', ()=>{
     const fileinput = document.getElementById("fileinput");
     const inputimg = document.getElementById("inputimg");
@@ -30,7 +29,8 @@ window.addEventListener('DOMContentLoaded', ()=>{
     const sharePost = document.getElementById("sharepost");
     const postText = document.querySelector('.content1-right textarea');
 
-    const threeposts = document.getElementsByClassName("threeposts");
+    const threeposts = document.querySelector(".threeposts");
+    const postDivs = threeposts.querySelectorAll('div');
     
     const nopost = document.getElementById("nopost");
 
@@ -55,15 +55,12 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
 
     modalButton.addEventListener("click", ()=>{
-    modal.classList.add("visible");
-    body.classList.add("darkback");
-    close.classList.add("visible");
-    
-    inputimg.src=profileimage.src;
-    modalId.value = nickname.textContent;
-    modalName.value = name.textContent;
-    modalSite.value = site.href;
-    modalProfile.value = text.textContent;
+        modal.showModal();
+        inputimg.src=profileimage.src;
+        modalId.value = nickname.textContent;
+        modalName.value = name.textContent;
+        modalSite.value = site.href;
+        modalProfile.value = text.textContent;
     });
 
     closeButton.addEventListener("click", ()=>{
@@ -71,9 +68,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
     });
    
     function closeModal() {
-        modal.classList.remove("visible");
-        body.classList.remove("darkback");
-        close.classList.remove("visible")
+        modal.close();
     };
 
     function saveToLocal () {
@@ -99,10 +94,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
         }
     }
 
-
-
-
-
     function loadImage() {
         const image = localStorage.getItem('image');
         if (image) {
@@ -126,28 +117,26 @@ window.addEventListener('DOMContentLoaded', ()=>{
     loadFromLocal();
 
     function closeSecondModal() {
-        // uploadpost.classList.add("invisible");
-        uploadpost.classList.remove("visible");
-        // body.classList.remove("darkback");
-        // close.classList.remove("visible")
-    };
+        uploadpost.style.display = 'none';
+        uploadpost.close();
+    }
 
 
     upload.addEventListener("click", (e)=>{
         e.preventDefault();
-        uploadpost.classList.add("visible");
-        body.classList.add("darkback");
-        });
+        uploadpost.style.display = '';
+        uploadpost.showModal();
+    });
 
     newpost.addEventListener('change', (e)=>{
+        console.log("change 이벤트 발생:", e.target.files);
         const file = e.target.files[0];
         if(file) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                
-                closeSecondModal();
                 newpostimg.src = e.target.result;
-                uploadpost1.showModal();
+                uploadpost.style.display = 'none';  
+                showUploadPost1();  
                 close.classList.add("visible");
             };
             reader.readAsDataURL(file);
@@ -159,37 +148,98 @@ window.addEventListener('DOMContentLoaded', ()=>{
     //공유하기 이후 단계
     sharePost.addEventListener('click', ()=>{
         if(newpostimg.src) {
-            firstpost.innerHTML = `<img src= ${newpostimg.src}>`
-
-
-            saveToLocal1();
+            const posts = JSON.parse(localStorage.getItem('posts')) || [];
+            const newPost = {
+                postimage: newpostimg.src,
+                postText: postText.value
+            };
+            posts.push(newPost);
+            localStorage.setItem('posts', JSON.stringify(posts));
+            
+            nopost.remove;
+            displayPosts();
             uploadpost1.close();
-            body.classList.remove("darkback");
-            close.classList.add("invisible");
-            nopost.classList.add("invisible");
             
         }
     });
 
-    function saveToLocal1 () {
-        let dataAll1 = {
-            postimage : newpostimg.src,
+    function saveToLocal1() {
+        const posts = JSON.parse(localStorage.getItem('posts')) || [];
+        posts.push({
+            postimage: newpostimg.src,
             postText: postText.value,
-        };
-        localStorage.setItem("dataAll1", JSON.stringify(dataAll1));
+        });
+        localStorage.setItem('posts', JSON.stringify(posts));
+    }
+    
+    function loadFromLocal1() {
+        const posts = JSON.parse(localStorage.getItem('posts')) || [];
+        posts.forEach((post, index) => {
+            if (index < postDivs.length) {
+                postDivs[index].innerHTML = `<img src="${post.postimage}" alt="post">`;
+            }
+        });
     }
 
-    function loadFromLocal1() {
-        const data = JSON.parse(localStorage.getItem('dataAll1'));
-        if (data) {
-            firstpost.innerHTML =  `<img src= ${data.postimage}>`
-            text.textContent = data.postText;
-            
-        }
-    }
+ 
+
+   
+    // function showUploadPost1() {
+    //     uploadpost1.style.display = '';
+    //     uploadpost1.showModal();
+    // }
+
+
     loadFromLocal1();
 
+    const closeUploadPost = document.querySelector('.uploadpost .close');
+    if (closeUploadPost) {
+        closeUploadPost.addEventListener('click', closeSecondModal);
+    }
 
+   
+    function displayPosts() {
+        const posts = JSON.parse(localStorage.getItem('posts')) || [];
+        threeposts.innerHTML = ''; 
+        
+        posts.forEach((post, index) => {
+            const div = document.createElement('div');
+            div.className = 'post-item';
+            div.innerHTML = `<img src="${post.postimage}" alt="post">`;
+            
+            
+            // div.addEventListener('click', () => {
+            //     showPostModal(post, index);
+            // });
+            
+            threeposts.appendChild(div);
+        });
+    }
+    
+
+   
+    // function showPostModal(post, index) {
+    //     uploadpost1.innerHTML = `
+    //         <div class="newpost-header1">
+    //             <span>게시물</span>
+    //             // <div class="post-actions">
+    //             //     <button class="edit-btn">수정</button>
+    //             //     <button class="delete-btn">삭제</button>
+    //             // </div>
+    //         </div>
+    //         <div class="newpost-content1">
+    //             <div class="content1-left">
+    //                 <img src="${post.postimage}">
+    //             </div>
+    //             <div class="content1-right">
+    //                 <textarea readonly>${post.postText}</textarea>
+    //             </div>
+    //         </div>
+    //     `;
+   
+    // }
+
+    
 });
 
 
